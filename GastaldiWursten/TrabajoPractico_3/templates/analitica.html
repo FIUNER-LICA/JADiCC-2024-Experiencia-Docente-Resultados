@@ -1,0 +1,129 @@
+{% extends 'usuario_administrador_base.html' %} <!--3)-->
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block content %}
+
+<hr>
+
+<div class="jumbotron my-4  ">
+    <div class="container">
+      <h3 class="display-5"><center>Analítica: {{nombre_departamento}}</center></h3>
+      <hr>
+      <div class=" lead mx-5 mr-5" style="text-align: justify; text-justify: inter-word;">
+      <p class="mx-2 mr-2 mt-2 mb-2">Aquí encontrará los datos analíticos correspondientes a los reclamos que ha recibido el departamento, además podrá analizar visualmente cómo se ha realizado la administración de los estados de los mismos y descargar un reporte del momento actual si así lo desea.</p>
+    </div>
+    </div>
+  </div>
+
+
+  
+  <div class="row mb-4 mx-3 mr-3 justify-content-center">
+    {% for estado, porcentaje in porcentaje_por_estado.items() %}
+    <div class="col-xl-3 col-lg-3 d-flex align-items-stretch mb-2 justify-content-center">
+        <div class="card shadow h-100" style="border: 1px solid #dfdfdf; border-radius: 40px;">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header ">
+                <h4 class="m-0 font-weight-bold text-primary"><center>{{estado}}</center></h4>
+            </div>
+            <!-- Card Body -->
+            {% if estado == "Pendiente":%}
+            <div class=" d-flex align-items-center justify-content-center badge-warning">
+            {% endif %}
+
+            {% if estado == "En Proceso": %}
+            <div class=" d-flex align-items-center justify-content-center badge-info">
+            {% endif %}
+
+            {% if estado == "Inválido": %}
+            <div class=" d-flex align-items-center justify-content-center badge-danger">
+            {% endif %}
+
+            {% if estado == "Resuelto" : %}
+            <div class=" d-flex align-items-center justify-content-center badge-success">
+            {% endif %}
+
+                    <h2> {{porcentaje}} % </h2>
+            </div>
+       </div>
+      </div>
+      {% endfor %}
+      
+</div>
+
+
+    <!-- Area Chart -->
+    <div class="col-11 mx-auto">
+        <div class="card shadow mb-4 " >
+            <!-- Card Header - Dropdown -->
+            <div class="card-header">
+                <h4 class="m-0 font-weight-bold text-primary"><center>Palabras más frecuentes en los reclamos del departamento</center></h4>
+                
+            </div>
+            <!-- Card Body -->
+            <div class="card-body mt-1 mb-1 mr-1 mx-1 " style="border: 1px solid #dfdfdf; border-radius: 40px;">
+              <div class="chart-area">
+        
+                  <a href="/static/Departamentos/{{nombre_departamento}}/Graficos/nube.png">
+                      <img src="/static/Departamentos/{{nombre_departamento}}/Graficos/nube.png" class="center mt-1" style="max-width: 100%; height: auto; object-fit: contain;" alt="Imagen del reclamo">
+                  </a>
+              </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row mb-4 mx-3 mr-3 ">
+        <div class="col-xl-6 col-lg-6 d-flex align-items-stretch mb-2">
+            <div class="card shadow h-100">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header ">
+                    <h4 class="m-0 font-weight-bold text-primary"><center>Gráfico Circular</center></h4>
+                </div>
+                <!-- Card Body -->
+                <div class=" d-flex align-items-center justify-content-center card-body" style="border: 1px solid #dfdfdf; border-radius: 40px;">
+                    
+                        <a href="/static/Departamentos/{{nombre_departamento}}/Graficos/circular_animado.gif">
+                            <img src="/static/Departamentos/{{nombre_departamento}}/Graficos/circular_animado.gif" class="center mt-1" style="max-width: 100%; height: auto; object-fit: contain;" alt="Imagen del reclamo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col-xl-6 col-lg-6 d-flex align-items-stretch mb-2">
+            <div class="card shadow h-100">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header ">
+                    <h4 class="m-0 font-weight-bold text-primary"><center>Diagrama De Barras</center></h4>
+                </div>
+                <!-- Card Body -->
+                <div class="d-flex align-items-center justify-content-center card-body" style="border: 1px solid #dfdfdf; border-radius: 40px;">
+                    <div class="chart-area">
+                        <a href="/static/Departamentos/{{nombre_departamento}}/Graficos/diagrama_de_barras.png">
+                            <img src="/static/Departamentos/{{nombre_departamento}}/Graficos/diagrama_de_barras.png" class="center mt-1" style="max-width: 100%; height: auto; object-fit: contain;" alt="Imagen del reclamo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% for formato in  formatos_informes_disponibles %}
+    <form action="{{url_for('analitica' , username = username)}}" method="POST">
+        <input type="hidden" name="GenerarInforme" value="{{formato}}">
+        <button type="submit" class="btn btn-danger btn-lg btn-block mt-3">Descargar Informe En Formato {{formato}}</button>
+    </form>
+    {% endfor %}
+
+    </br>
+    </br>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{%- endblock scripts %}

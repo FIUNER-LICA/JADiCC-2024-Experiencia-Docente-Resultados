@@ -1,0 +1,8 @@
+Juan Cevallos;96262531;40;profesor
+Javier Perez;96874514;29;profesor
+Maria Gomez;87654321;30;profesor
+Luz Ramirez;88741581;33;profesor
+Carlos Lopez;98765432;25;estudiante
+Ana Martinez;23456789;18;estudiante
+Lucia Martinez;23456701;20;estudiante
+Ana Rodriguez;47527975;23;estudiante

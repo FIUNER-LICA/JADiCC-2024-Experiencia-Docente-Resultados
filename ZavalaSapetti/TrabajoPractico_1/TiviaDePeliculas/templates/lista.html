@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del juego</title>
+</head>
+<body>
+    <div class = "cabezera_div">
+        <img class = "cabezera" src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">    
+    </div>  
+    
+    <h1>Listado de Películas</h1>    
+    <div class="peliculas_div">        
+        <button>{{peliculas[0]}}</button>
+        {% set n = peliculas|length %}
+        {% for i in range(1, n) %}
+            {% if peliculas[i][0] != peliculas[i - 1][0] %}                                
+                <div class="divisor"></div>
+                <br>
+            {% endif %}
+            <button>{{ peliculas[i] }}</button>            
+        {% endfor %}     
+        <div class="divisor"></div>
+        <br>
+
+    </div>
+    <form action="/" method="get">
+        <button class="home" type="submit">Volver a la página inicial</button>
+    </form>    
+</body>
+
+<style>
+    html{        
+        background-color: black;
+        text-align: center;
+        color: white;
+    }
+    
+    button{
+        margin-top: 10px;
+        position: relative;    
+        width: 350px;
+        height: 60px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: aqua;    
+        transition: background-color 0.5s, color 0.5s;    
+        background-color: black;
+        color: aqua;
+    
+    }
+        
+    button:hover{    
+        background-color: aqua;
+        color:black;
+        transition: background-color 0.5s, color 0.5s;    
+    }
+
+    .peliculas_div{        
+        width: 840px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .divisor{
+        width: 860px;                
+        border: dotted aqua 1px;
+    }
+
+    .home{
+        background-color: rgb(0,0,0,.5);
+        position: fixed;        
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        width: 860px;
+        height: 30px;
+    }
+
+    .cabezera{
+        position: relative;    
+    }
+
+</style>
+</html>
+    

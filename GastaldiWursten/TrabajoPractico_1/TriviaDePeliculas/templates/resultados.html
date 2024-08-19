@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--Pantalla que devuelve los resultados historicos almacenados en historial.txt -->
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resultados historicos</title>
+        <link rel="stylesheet" href="/static/styles/resultados.css"> 
+    </head>
+
+    <body>
+        <img src="/static/images/trivia2final.gif" alt="">
+        <table>
+        <tr>
+            <td >
+                🔠 Nombre
+            </td>
+            <td>
+                🎯 Aciertos
+            </td>
+            <td>
+                📅 Fecha y Hora ⏰ 
+            </td>
+            
+        </tr>
+        {% for partida in resultados %}
+        <tr>
+            <td style="color: rgb(247, 64, 231);">
+                {{partida[0]}}
+            </td>
+            <td style="color: rgb(209, 255, 5); ">
+                {{partida[1]}}
+            </td>
+            <td>
+                <spam style="color: rgb(0, 255, 0);">{{partida[2]}}</spam> 
+                <spam style="color: rgb(221, 30, 30);">{{partida[3]}}</spam>
+            </td>
+            
+        </tr>
+
+        {% endfor %}
+        </table>
+        <form action="{{url_for('home')}}"> 
+        <button class="siguiente-btn">Volver a Inicio</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--Recuadro que muestra si la respuesta fue correcta o incorrecta-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugando Trivia Peliculas</title>
+    <link rel="stylesheet" href="/static/styles/evaluador.css"> 
+</head>
+
+
+<body>
+    <img src="static/images/trivia2final.gif" alt="" >
+    <h2>Frase:{{session.get('nro_partida_actual') - 1}}/{{session.get('nro_partidas')}}</h2>
+    <!--Formato-->
+    <div class="respuesta-container">
+        <div class="respuesta-box">
+            {% if es_correcta %}
+                <h1 style="color: rgb(7, 253, 138);">Respuesta Correcta. ¡Felicitaciones!</h1>
+            {% else %}
+                <h1 style="color: rgb(158, 13, 50);">Respuesta Incorrecta</h1>
+                <h3><spam style="color: rgb(255, 255, 255);">La opción correcta era:
+                    </spam>
+                    <spam style="color: rgb(222, 226, 0);">
+                    {{respuesta_correcta}}
+                    </spam>               
+                </h3>
+            {% endif %}
+        </div>
+
+        <!--Pasaje de frases hasta finalizar la cantidad ingresada por el usuario-->
+        {% if nro_partidas_restantes > 0 %}
+        <form action="{{url_for('trivia')}}" method="post"> 
+        <button class="siguiente-btn">Siguiente Frase</button>
+        </form>
+        {% else %}
+        <form action="{{url_for('puntuacion')}}" method="post"> 
+        <button class="siguiente-btn">Finalizar</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

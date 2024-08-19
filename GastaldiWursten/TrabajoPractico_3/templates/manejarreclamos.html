@@ -1,0 +1,306 @@
+{% extends 'usuario_administrador_base.html' %} <!--3)-->
+
+
+{% block title %}
+Manejar Reclamos
+{% endblock %}
+
+{%- block styles %}
+<link rel='stylesheet' id='roboto-subset.css-css'  href='/static/css/reclamo.css' type='text/css' media='all' />
+{%- endblock styles %}  
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+      
+            {% for message in messages %}
+            <div class="alert alert-success mt-1" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        
+     
+        {% endif %}
+    {% endwith %} 
+
+
+    {% if reclamos == [] and filtro == "Todos los Reclamos" : %}
+
+    <div class="alert alert-info mt-4" role="alert">
+      <h5 class=" font-weight-bold "><center>Su departamento no ha recibido ningún reclamo</center></h5>
+    </div>
+    {% else: %} 
+
+    <hr class="my-4 ">
+
+    <h1 class="display-6 font-weight-bold"><center>Manejar Reclamos:{{filtro}}</center></h1>
+  
+    <hr class="my-4">
+  
+    <nav class="navbar navbar-expand-lg ">
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="filtroEstado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filtrar por Estado
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="filtroDepartamento">
+                    <a class="dropdown-item" href="{{ url_for('manejarreclamos', username=username) }}">Todos</a>
+                    <form id="myForm2" method="post" action="{{ url_for('manejarreclamos', username=username) }}">
+                        <input id="filtrar_estado" type="hidden" name="filtrar_estado" value="" />
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'En Proceso'; document.getElementById('myForm2').submit();">En Proceso</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Pendiente'; document.getElementById('myForm2').submit();">Pendiente</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Resuelto'; document.getElementById('myForm2').submit();">Resuelto</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Inválido'; document.getElementById('myForm2').submit();">Invalido</a>
+                    </form>
+                </div>
+
+
+
+              </li>
+          </ul>
+      </div>
+  </nav>
+
+
+{% for id,datos in dict_reclamos_users.items(): %}
+
+
+
+<div class="container mt-5 ">
+    <div class="card" >
+      <div class="card-two">
+      <div class="card-title-box ">
+        <h5 class="card-title"> Asunto: {{datos["reclamo"].asunto}}</h5>
+      </div>
+      <div class="cardimg card-table" style="max-width: auto; height: 200px; overflow: hidden;">
+        <a href="/static/Reclamos/{{datos["reclamo"].nombre_imagen}}" >
+            <img src="/static/Reclamos/{{datos["reclamo"].nombre_imagen}}" class="center mt-1 img-fluid" style="height: 96%; object-fit: contain;" alt="Imagen del reclamo">
+        </a>
+    </div>
+      <div class="card-content-box">
+        <p class="card-text">{{datos["reclamo"].contenido}}</p>
+      </div>
+      <div class="card-table">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 bg-white table-bordered text-center">
+                <thead class="table-info">
+                    <tr>
+                        <th style="width: 10%">ID</th>
+                        <th style="width: 20%">Fecha/Hora</th>
+                        <th style="width: 20%">Departamento</th>
+                        <th style="width: 20%">N° Adherentes</th>
+                        <th style="width: 20%">Estado</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-middle">
+                            <p class="fw-normal mb-1">{{datos["reclamo"].id}}</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="fw-normal mb-1">{{datos["reclamo"].fecha_y_hora}}</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="fw-normal mb-1">{{datos["reclamo"].departamento_correspondiente}}</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="fw-normal mb-1">{{datos["reclamo"].numero_adheridos}}</p>
+                        </td>
+                        {% if datos["reclamo"].estado == "Pendiente":%}
+                        <td class="align-middle">
+                            <span class="badge badge-warning rounded-pill d-inline">{{datos["reclamo"].estado}}</span>
+                        </td>
+                        {% endif %}
+    
+                        {% if datos["reclamo"].estado == "En Proceso": %}
+                        <td class="align-middle">
+                            <span class="badge badge-info rounded-pill d-inline">{{datos["reclamo"].estado}}</span>
+                        </td>
+                        {% endif %}
+    
+                        {% if datos["reclamo"].estado == "Inválido": %}
+                        <td class="align-middle">
+                            <span class="badge badge-danger rounded-pill d-inline">{{datos["reclamo"].estado}}</span>
+                        </td>
+                        {% endif %}
+    
+                        {% if datos["reclamo"].estado == "Resuelto" : %}
+                        <td class="align-middle">
+                            <span class="badge badge-success rounded-pill d-inline">{{datos["reclamo"].estado}}</span>
+                        </td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+      
+      <div class="card-table">
+        <div class="accordion" id="accordionExample2">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                
+                    <th>Autor del Reclamo</th>
+
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                            src="/static/imagenes_generales/perfil.jpg"
+                            alt=""
+                            style="width: 45px; height: 45px"
+                            class="rounded-circle"
+                            />
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">ID: {{datos["usuario"].id}} ({{datos["usuario"].nombre}})</p>
+                          <p class="text-muted mb-0">{{datos["usuario"].email}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    
+                  </tr>
+                  </tbody>
+      
+              
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      
+      <div class="card-table">
+        <div class="accordion" id="accordionExample2">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <th>Usuarios Aheridos</th>
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+              <div class="accordion-body show">
+                <tbody>
+                  {%if datos["usuarios_adheridos"] != [] : %}
+                  {%for usuario_adherido in datos["usuarios_adheridos"]: %}
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                            src="/static/imagenes_generales/perfil.jpg"
+                            alt=""
+                            style="width: 45px; height: 45px"
+                            class="rounded-circle"
+                            />
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">ID: {{usuario_adherido.id}} ({{usuario_adherido.nombre}})</p>
+                          <p class="text-muted mb-0">{{usuario_adherido.email}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    
+                  </tr>
+
+                        {% endfor %}
+
+                  {% else%}
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1">No posee usuarios adheridos</p>
+                  
+                  </div>
+                  
+                  {%endif%}
+      
+                  
+                </tbody>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+      <div class="card-table">
+          <table class="table align-middle mb-0 bg-white">
+              <tbody>
+                  <tr>
+                      <td>
+                          <form action="{{ url_for('manejarreclamos', username=username) }}" method="POST" class="d-flex">
+                              <input type="hidden" name="cambiar_estado" value="{{True}}">
+                              <input type="hidden" name="id_reclamo" value="{{datos["reclamo"].id}}">
+                              <input type="hidden" name="nuevo_estado" id="hidden_estado_{{datos["reclamo"].id}}" value="">
+                              <label for="estado" class="me-2">Cambiar Estado:</label>
+                              <select name="estado" id="estado" class="form-select me-2" onchange="document.getElementById('hidden_estado_{{datos["reclamo"].id}}').value = this.value;">
+                                  <option value="Pendiente" {% if datos["reclamo"].estado == 'Pendiente' %} selected {% endif %}>Pendiente</option>
+                                  <option value="Inválido" {% if datos["reclamo"].estado == 'Inválido' %} selected {% endif %}>Inválido</option>
+                                  <option value="Resuelto" {% if datos["reclamo"].estado == 'Resuelto' %} selected {% endif %}>Resuelto</option>
+                                  <option value="En Proceso" {% if datos["reclamo"].estado == 'En Proceso' %} selected {% endif %}>En Proceso</option>
+                              </select>
+                              <button type="submit" class="btn btn-primary">Cambiar Estado</button>
+                          </form>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          {% if nombre_departamento_a_cargo == "secretaría técnica"%}
+          <table class="table align-middle mb-0 bg-white">
+              <tbody>
+                  <tr>
+                      <td>
+                        <form action="{{ url_for('manejarreclamos', username=username) }}" method="POST" class="d-flex">
+                          <input type="hidden" name="derivar_reclamo" value="{{True}}">
+                          <input type="hidden" name="id_reclamo" value="{{datos["reclamo"].id}}">
+                          <input type="hidden" name="nuevo_departamento" id="hidden_dep_{{datos["reclamo"].id}}" value="">
+                            <label for="departamento" class="me-2">Derivar reclamo a:</label>
+                            <select name="departamento" id="departamento" class="form-select me-2" onchange="document.getElementById('hidden_dep_{{datos["reclamo"].id}}').value = this.value;">
+                              {% for departamento in nombres_departamentos %}
+                              {% if datos["reclamo"].departamento_correspondiente != departamento %}
+                              <option value="{{departamento}}">{{departamento}}</option>
+                              {% endif %}
+                              {% endfor%}
+                            </select>
+                            <button type="submit" class="btn btn-primary">Derivar Reclamo</button>
+                        </form>
+
+                    
+
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          {% endif %}
+
+      </div>
+
+    </div>
+    
+  </div>
+</div>
+<br>
+<hr style="height: 3px; border: 0; background: #333; background-image: linear-gradient(to right, #ccc, #333, #ccc);">
+
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}
+{% block scripts %}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{%- endblock scripts %}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graficos de Resultados</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
+
+</head>
+<body>
+    <div class="cabezera_div">
+        <img class="cabezera" src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">            
+    </div>      
+
+    <div id = "descargar">
+        <canvas id="grafica_pastel" class = "pastel" width="420" height="420"></canvas>        
+        <canvas id="grafica" class = "grafica" width="420" height="420"></canvas>
+    </div>
+    <form action="/" method="get">
+        <button class="home" type="submit">Volver a la página inicial</button>
+    </form>    
+    <form action="/registros.html" method="get">
+        <button class="registros" type="submit">Volver a Resultados</button>
+    </form>
+
+    <script>        
+        let ctx = document.getElementById('grafica_pastel').getContext('2d');
+
+        // Crear la gráfica de pastel
+        let pastel = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Aciertos', 'Fallos'],
+                datasets: [{
+                    label: 'cantidad',
+                    data: {{pastel}}, // Aquí defines los valores de los dos datos
+                    backgroundColor: [
+                        'green', // Color para Datos 1
+                        'gray' // Color para Datos 2
+                    ],
+                    borderColor: [
+                        'gold',
+                        'red'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: true
+            }
+        });
+    
+
+        let ctx2 = document.getElementById('grafica').getContext('2d');
+        
+        let fechasConvertidas = {{fechas}}.map(fecha => {
+            let [dia, mes, año] = fecha;
+            return `${dia}-${mes}-${año}`;
+        });
+
+
+        let grafica = new Chart(ctx2, {
+            type: 'line',
+            data: {                
+                labels: fechasConvertidas,
+                datasets: [{
+                    label: 'Aciertos',
+                    data: {{arr_aciertos}},
+                    borderColor: 'green',
+                    backgroundColor: 'gold',
+                    fill: false
+                }, {
+                    label: 'Fallos',
+                    data: {{arr_fallos}},
+                    borderColor: 'gray',
+                    backgroundColor: 'red',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: true
+            }
+        });
+    </script>
+
+
+    <button onclick="descargar()" class = "descargar">Descargar PDF</button>
+
+    <script>
+        function descargar() {
+            var pdf = new jsPDF();
+
+            // Convertir el primer gráfico a imagen y agregarlo al PDF
+            var canvasPastel = document.getElementById('grafica_pastel');
+            var imgDataPastel = canvasPastel.toDataURL("image/jpeg", 1.0);
+            pdf.addImage(imgDataPastel, 'JPEG', 10, 10); // Posición inicial (10, 10)
+
+            // Convertir el segundo gráfico a imagen y agregarlo al PDF debajo del primero
+            var canvasGrafica = document.getElementById('grafica');
+            var imgDataGrafica = canvasGrafica.toDataURL("image/jpeg", 1.0);
+            pdf.addImage(imgDataGrafica, 'JPEG', 10, 150); // Posición debajo del primero
+
+            // Guardar el PDF
+            pdf.save("graficas_estadisticas.pdf");
+        }
+
+    </script>
+</body>
+<style>
+    html{        
+        background-color: black;
+        text-align: center;
+        color: white;
+    }
+
+    button{
+        margin-top: 10px;
+        position: relative;    
+        width: 350px;
+        height: 60px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: aqua;    
+        transition: background-color 0.5s, color 0.5s;    
+        background-color: black;
+        color: aqua;
+
+    }
+        
+    button:hover{    
+        background-color: aqua;
+        color:black;
+        transition: background-color 0.5s, color 0.5s;    
+    }
+
+    .peliculas_div{        
+        width: 840px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .divisor{
+        width: 860px;                
+        border: dotted aqua 1px;
+    }
+
+    .home{
+        background-color: rgb(0,0,0,.5);
+        position: fixed;        
+        left: 50%;
+        transform: translateX(-150%);
+        bottom: 10px;
+        width: 280px;
+        height: 30px;
+    }
+
+    .registros{
+        background-color: rgb(0,0,0,.5);
+        position: fixed;        
+        left: 50%;        
+        bottom: 10px;
+        transform: translateX(50%);
+        width: 280px;
+        height: 30px;
+    }
+
+    .descargar{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        height: 30px;
+    }
+
+
+    .cabezera{
+        position: relative;    
+    }
+
+    table {
+        width: 860px;
+        border-collapse: collapse;
+        border-radius: 5px; /* Establecer el radio de las esquinas */
+        overflow: hidden; /* Ocultar cualquier contenido que se desborde */
+        margin: 0 auto;
+    }
+    th, td {
+        border: 1px solid aqua;
+        padding: 5px;
+    }
+
+    tr{
+        background-color: transparent;
+        color: white;
+        transition: background-color 0.5s,color 0.5s;
+    }
+
+    tr:hover{
+        background-color: aqua;
+        color: black;
+        transition: background-color 0.5s,color 0.5s;
+    }
+
+    .grafica{
+        position: absolute;        
+        left: 50%;        
+        transform: translateX(-100%);
+    }
+
+    .pastel{
+        position: absolute;
+        left: 50%;
+    }
+
+
+</style>
+</html>

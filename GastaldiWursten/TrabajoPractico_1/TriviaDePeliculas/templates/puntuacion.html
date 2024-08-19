@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<!--Pantalla que muestra el puntaje luego de jugar-->
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Puntuacion</title>
+        <link rel="stylesheet" href="/static/styles/puntuacion.css"> 
+    </head>
+
+    <body>
+        <img src="/static/images/trivia2final.gif" alt="">
+        <div class="info-box">
+        <h1>🎯 Su puntaje fue: {{puntaje}}</h1>
+        </div>
+        <form action="{{url_for('home')}}"> 
+        <button class="siguiente-btn">Volver a Inicio</button>
+        </form>
+    </body>
+</html>

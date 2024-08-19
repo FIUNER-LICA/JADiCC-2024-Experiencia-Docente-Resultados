@@ -1,0 +1,78 @@
+{% extends 'usuario_administrador_base.html' %} <!--3)-->
+
+{% block title %}
+Home
+{% endblock %}
+{%- block styles %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+{%- endblock styles %}
+
+{% block content %}
+
+
+  <div class="jumbotron my-4">
+    <div class="container">
+      <hr>
+      <h1 class="display-3">Bienvenido! {{nombre_dep}}</h1>
+      <hr>
+        <div class="row" style="background-color: #ebebeb; border-radius: 15px; padding: 20px;">
+            <div class="col-md-5" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="text-align: justify; text-justify: inter-word;">
+                    <p style="font-size: 20px;">Este es el sistema de atención de reclamos de la Facultad de Ingeniería de la Universidad Nacional de Entre Ríos, usted como administrador responsable del departamento "{{nombre_dep}}" deberá atenter los reclamos realizados por los usuarios y que le fueron asignados.</p>
+                    <div style="margin-top: 5px;">
+                      <a class="btn btn-primary btn-lg" href="{{ url_for('ayuda_admin', username=username) }}" role="button">Ayuda &raquo;</a>
+                  </div>
+                  </div>
+                
+            </div>
+            <div class="col-md-7" style="display: flex; flex-direction: column;">
+                <div class="slick-carousel" style="flex: 1; "> <!-- Ajusta el ancho del carrusel al 100% -->
+                  <div style="position: relative; ">
+                      <img src="/static/imagenes_generales/manejarreclamo.jpg" alt="imagen1" style="width: 100%; height: auto;border-radius: 5px; " >
+                      <div class="carousel-caption" style="position: absolute; bottom: 0; background: rgba(78, 78, 78, 0.5); width: 100%; color: #ffffff; padding: 10px;border-radius: 5px;">
+                          <h5>Maneje los reclamos del departamento</h5>
+                          <p>Puede ver los reclamos, conocer su creador y sus adherentes, y así realizar un correcto manejo  de los mismos.</p>
+                      </div>
+                  </div> <!-- Asegúrate de reemplazar con tus propias imágenes y ajusta el ancho al 100% -->
+                  <div style="position: relative;">
+                      <img src="/static/imagenes_generales/analiticosreclamo.jpg" alt="imagen2" style="width: 100%; height: auto; border-radius: 5px;">
+                      <div class="carousel-caption" style="position: absolute; bottom: 0; background: rgba(78, 78, 78, 0.5); width: 100%; color: #ffffff; padding: 10px;border-radius: 5px;">
+                          <h5>Visualice gráficos analíticos del departamento</h5>
+                          <p>Puede analizar la gestion de su departamento mediante los gráficos analíticos proporcionados.</p>
+                      </div>
+                  </div> <!-- Asegúrate de reemplazar con tus propias imágenes y ajusta el ancho al 100% -->
+                  <div style="position: relative;">
+                      <img src="/static/imagenes_generales/descargarreporte.jpg" alt="imagen3" style="width: 100%; height: auto;border-radius: 5px;">
+                      <div class="carousel-caption" style="position: absolute; bottom: 0; background: rgba(78, 78, 78, 0.5); width: 100%; color: #ffffff; padding: 10px;border-radius: 5px;">
+                          <h5>Descargue los archivos de informe</h5>
+                          <p>Puede generar y descargar en distintos formatos archivos de informe del departamento.</p>
+                      </div>
+                  </div><!-- Asegúrate de reemplazar con tus propias imágenes y ajusta el ancho al 100% -->
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script> <!-- Mueve el script de Slick Carousel aquí -->
+<script>
+    $(document).ready(function(){
+        $('.slick-carousel').slick({
+            autoplay: true, // Habilita el desplazamiento automático
+            autoplaySpeed: 4000, // Establece el tiempo de desplazamiento automático a 4 segundos
+            arrows: true, // Muestra los controles de flecha para navegar por el carrusel
+            prevArrow: '<button type="button" class="slick-prev">Previous</button>', // Personaliza el botón de la flecha previa
+            nextArrow: '<button type="button" class="slick-next">Next</button>', // Personaliza el botón de la flecha siguiente
+            dots: true, // Muestra los indicadores del carrusel
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{%- endblock scripts %}

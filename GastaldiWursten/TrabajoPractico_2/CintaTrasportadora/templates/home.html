@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinta Transportadora</title>
+    <link rel="stylesheet" href="/static/styles/home.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h2>Cinta Transportadora</h2>
+            <form action="{{url_for('home')}}" method="post">
+            <p> <b>N° Alimentos</b> <input type="number" min="1" name="input_nro_alimentos" required></p>
+            <img src="/static/images/cinta.gif" alt="Imagen">
+            <br>
+            <br>
+            <button class="btn-submit">Iniciar Carga</button>
+            </form>
+        </div>
+        <div class="right-side">
+            <br>
+            <br>
+            {% for tipo,promedio in promedios_aw.items() %}
+            {% if promedio <= 0.95 %}
+            
+            <p class="fruit-paragraph">
+            {% if tipo == "Alimento" or tipo == "Fruta" or tipo == "Verdura"%} 
+                {% if tipo == "Alimento" %}
+                <b>aw Total</b>
+                {%else%}
+                <b>aw {{tipo}}s</b>
+                {%endif%}           
+            {%else%}
+                aw {{tipo}}s
+            {%endif%}
+            <span class="number-box">{{promedio}}</span></p>
+            {%else%}
+
+            <p class="fruit-paragraph">
+                {% if tipo == "Alimento" or tipo == "Fruta" or tipo == "Verdura"%} 
+                    {% if tipo == "Alimento" %}
+                    <b>aw Total</b>
+                    {%else%}
+                    <b>aw {{tipo}}s</b>
+                    {%endif%}           
+                {%else%}
+                    aw {{tipo}}s
+                {%endif%}              
+            <span class="number-box-yellow">{{promedio}}</span></p>
+            {%endif%}
+            {% endfor %}
+
+            <br>
+            <br>
+        
+            {% if inspeccionar_cajon %}
+            <div class="yellow-box">
+                <p class="brown-text">Se recomienda inspeccionar el cajón</p>
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</body>
+</html>

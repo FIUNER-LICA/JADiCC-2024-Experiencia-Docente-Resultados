@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--Titulo que figura en el recuadro del explorador-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia de Películas</title>
+    <link rel="stylesheet" href="/static/styles/home.css"> 
+</head>
+
+<!--Casilleros, botones e instrucciones que figuran en la pantalla-->
+<body>
+    <img src="/static/images/trivia2final.gif" alt="">
+    <h1> 🎬  <u>Trivia de Películas </u>   🎬</h1>
+    <div class="row-container">
+        <form action="{{url_for('trivia')}}" method="post" class="container">
+        </br>
+            <div class="input-container">
+                <label for="nro_partidas">Número de Frases a Jugar:</label>
+                <input type="text" id="nro_partidas" name="input_nro_partidas" value="">
+            </div>
+            {% if nro_partida_incorrecto %}
+            <h7 style="color: rgb(158, 13, 50); margin-left: 340px;">Ingrese número válido</h7>
+            {% else %}
+            </br>
+            {% endif %}
+
+            <div class="input-container">
+                <label for="nombre">Nombre de Usuario:</label>
+                <input type="text" id="nombre" name="input_nombre" value="">
+            </div>
+            <br>
+            <br>
+
+            <input type="submit" value="Iniciar Juego">
+        </form>
+
+        <div class="instructions-container">
+            <h11> <spam style="font-size: 1.4em; color: rgb(255, 255, 255);">Instrucciones:</spam> 
+                <spam style="color: rgb(255, 230, 0);">
+                    <br>
+                    El juego se trata de elegir el título de la pelicula correcto, entre tres opciones, a la que corresponde la frase mostrada.
+                </spam>
+            </h11>
+        </div>
+    </div>
+    <form action="{{ url_for('resultados') }}"> 
+        <input type="submit" value="Resultados históricos">
+    </form>
+</body>
+</html>
+

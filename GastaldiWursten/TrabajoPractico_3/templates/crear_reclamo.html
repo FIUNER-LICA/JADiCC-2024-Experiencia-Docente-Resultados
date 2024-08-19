@@ -1,0 +1,78 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends 'usuario_final_base.html' %} <!--3)-->
+
+{% block title %}
+Crear Reclamo
+{% endblock %}
+
+
+{% block content %}
+
+<hr class="my-4 ">
+
+  <h1 class="display-6 font-weight-bold"><center>Crear Reclamo</center></h1>
+
+  <hr class="my-4 mb-4">
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+      
+            {% for message in messages %}
+            <div class="alert alert-danger mt-1" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        
+     
+        {% endif %}
+    {% endwith %} 
+										
+<!--hace un post a la misma ruta donde se crea el formulario-->
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="form-group row">
+        <label for="asunto" class="col-sm-1 col-form-label"><b>Asunto:</b></label>
+        <div class="col-sm-11">
+            <input type="text" id="asunto" name="asunto" class="form-control" required>
+        </div>
+    </div>
+    <div class="form-group mt-2 mb-2">
+        <label for="imagen"><b>Imagen </b> (<i>opcional</i> )</label>
+        <input type="file" id="imagen" name="imagen" class="form-control-file mx-3">
+    </div>
+                        {% for error in reclamo_form.imagen.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+    <div class="form-group">
+        <label for="contenido"><b>Contenido:</b></label>
+        <textarea id="contenido" name="contenido" class="form-control" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Crear</button>
+</form>
+
+
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const fileInput = document.getElementById('imagen');
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size;
+                const maxSize = 5 * 1024 * 1024; // 5 MB en bytes
+                if (fileSize > maxSize) {
+                    alert('El tamaño del archivo supera los 5MB. Por favor, elige un archivo más pequeño.');
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+</script>
+
+{%- endblock scripts %}

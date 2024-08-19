@@ -1,0 +1,74 @@
+.card {
+  border: 2px solid #999898;
+  border-radius: 15px;
+  box-shadow: 0 6px 8px rgba(22, 18, 83, 0.1);
+  margin-bottom: 20px;
+  background-color: #f5f2e9;
+  margin-left: 20px; /* Agregamos margen izquierdo */
+  margin-right: 20px; /* Agregamos margen derecho */
+
+}
+.card-two{
+  border-radius: 15px;
+  box-shadow: 0 6px 8px #b1b1b1;
+  background-color: #fcfbf9;
+}
+
+.card-img-top {
+  border: 1.5px solid #c2c1c1;
+  margin-top: 20px;
+  width:  800px; /*or 70%, or what you want*/
+  height: 200px;
+   /* Agregamos margen inferior a la imagen */
+  margin-left: 10px; /* Agregamos margen izquierdo */
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.card-title-box {
+  background-color: #b9e3ff;
+  box-shadow: 0 6px 8px rgba(0, 138, 148, 0.1);
+  padding: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center; /* Centra el título horizontalmente */
+}
+.card-content-box {
+  border: 1px solid #a7a5a5;
+  box-shadow: 0 6px 8px rgba(0, 138, 148, 0.1);
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  height: 150px;
+  overflow: hidden;
+  margin-left: 10px; /* Agregamos margen izquierdo */
+  margin-right: 10px; /* Agregamos margen derecho */
+}
+.card-content-box p {
+  margin: 0;
+}
+.card-body {
+  padding: 20px;
+}
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+
+  }
+
+  .card-table {
+      margin-left: 10px; /* Agregamos margen izquierdo */
+      margin-right: 10px;
+      border: 1px solid #a7a5a5;
+      box-shadow: 0 6px 8px rgba(0, 138, 148, 0.1);
+      border-radius: 5px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+  }
+  
+ .cardimg {
+  margin-left: 10px; /* Agregamos margen izquierdo */
+  margin-right: 10px;
+
+  }

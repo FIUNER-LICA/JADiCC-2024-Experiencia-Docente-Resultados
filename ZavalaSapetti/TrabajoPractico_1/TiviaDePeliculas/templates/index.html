@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trivia de películas</title>            
+    </head>
+
+    <body>
+
+        <div class = "cabezera_div">
+            <img class = "cabezera"src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">    
+        </div>        
+        <div  class = "input_form_div">
+            <form action="/" method="post">        
+                <div class = "input_div">
+                    <label class = "input_label" for="num_frases">N° de frases:</label>
+                    <input class = "input_number", type="number" id="frases" name="frases" min="3" value = 3>        
+                </div>
+                    
+                <div class = "input_div">
+                    <label class = "input_label" for="username">Nombre de usuario:</label>
+                    <input class = "input", type="text" id="usuario" name="usuario" placeholder="Ingrese nombre de usuario" required><br>
+                </div>                    
+                <button type="submit" name = 'boton' value = "inicio">Iniciar Trivia</button><br>                                            
+            </form>    
+                                    
+            <form action="/" method="post">
+                <button type="submit" name = 'boton' value = "lista">Lista Películas</button><br>                
+                <button type="submit" name = 'boton' value = "resultados">Ver Resultados</button><br>                            
+            </form>
+    </body>
+<style>
+
+html{        
+    background-color: black;
+    text-align: center;
+}
+
+.input_div{
+    height: 50px;        
+    text-align: left;
+}
+
+.input_label{    
+    text-align: center;
+    position: relative;        
+    font-size: 150%;             
+    left:   calc(50% - 360px);
+    width: 200px;
+    height: 50px;
+    color: white;
+}
+
+.input{
+    position:absolute;
+    left: 50%;    
+    height: 40px;
+    border-radius: 5px;
+    transform: translateX(-50%);    
+    width: 250px;
+}
+
+
+.input_number{
+    position:absolute;
+    left: 50%;    
+    height: 40px;
+    border-radius: 5px;
+    transform: translateX(-100%);    
+    width: 120px;
+}
+
+button{
+    margin-top: 5px;
+    position: relative;    
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: aqua;    
+    transition: background-color 0.5s, color 0.5s;  
+    background-color: black;
+    color: aqua;
+
+}
+
+button:hover{    
+    background-color: aqua;
+    transition: background-color 0.5s, color 0.5s;  
+    color: black;
+}
+
+.cabezera_div{
+    text-align: center;
+}
+
+.cabezera{
+    position: relative;
+    
+}
+
+</style>
+</html>

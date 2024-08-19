@@ -1,0 +1,129 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% if usuario_rol == "administrador" %}
+
+{% extends 'usuario_administrador_base.html' %}
+
+{% else %}
+
+
+{% extends 'usuario_final_base.html' %} <!--3)-->
+
+{% endif %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+      
+            {% for message in messages %}
+
+            {% if message == "Los datos se han actualizado correctamente" 
+            or message == "La contraseña se ha actualizado correctamente" %}
+            <div class="alert alert-success mt-1" role="alert">
+                {{ message }}
+            </div>
+            {%else%}
+            <div class="alert alert-danger mt-1" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            
+
+            {% endfor %}
+        
+     
+        {% endif %}
+    {% endwith %} 
+
+
+   
+<div class="row">
+<div class="col-2">
+</div>
+<div class="col-10">
+
+                            <div class="container  mx-5 my-2">
+                                <div class="row ">
+                                    
+                                        <!--hace un post a la misma ruta donde se crea el formulario-->
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <img src="/static/imagenes_generales/login.png" alt="..." class="img-rounded" style="width:80%">
+                                                </div>
+                                            <div class="col-10">
+                                                <h1 class=" mt-4 mx-5">Mi Perfil</h1>
+                                                </div>
+                                        </div>
+                                            
+                                        
+                                        
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <form method="post">
+                                                    {{ form.hidden_tag() }}
+                                                    <div class="form-group">
+                                                        {{ form.nombre.label() }}
+                                                        {{ form.nombre(class="form-control") }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.apellido.label() }}
+                                                        {{ form.apellido(class="form-control") }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.username.label() }}
+                                                        {{ form.username(class="form-control") }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.claustro.label() }}
+                                                        {{ form.claustro(class="form-select") }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        {{ form.email.label() }}
+                                                        {{ form.email(class="form-control") }}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                {{ form.submit(class="btn btn-primary my-4 w-100") }}
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <form class="mx-auto" action="{{url_for('cambiarcontraseña' , username=username)}}" class="d-inline-block">
+                                                                <button class="btn btn-primary my-4 w-100" type="submit">Cambiar contraseña</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                </div>
+
+                            
+       
+                        </div>
+                    </div>
+                </div>
+                                
+                            
+
+                                
+  
+
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{%- endblock scripts %}

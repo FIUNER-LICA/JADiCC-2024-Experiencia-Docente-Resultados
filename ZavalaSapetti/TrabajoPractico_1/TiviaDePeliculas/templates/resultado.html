@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del juego</title>
+</head>
+<body>
+    <div class = "cabezera_div">
+        <img class = "cabezera" src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">    
+    </div>  
+    <h1>Partida terminada {{ usuario }}</h1>    
+    <h2>Puntaje: {{ puntaje }}</h2>    
+    <form action="/" method="get">
+        <button type="submit">Volver a la página inicial</button>
+    </form>    
+</body>
+
+<style>
+    html{        
+        background-color: black;
+        text-align: center;
+        color: white;
+    }
+    
+    button{
+        margin-top: 10px;
+        position: relative;    
+        width: 350px;
+        height: 60px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: aqua;    
+        transition: background-color 0.5s, color 0.5s;    
+        background-color: black;
+        color: aqua;
+    
+    }
+        
+    button:hover{    
+        background-color: aqua;
+        color:black;
+        transition: background-color 0.5s, color 0.5s;    
+    }
+
+</style>
+</html>
+    

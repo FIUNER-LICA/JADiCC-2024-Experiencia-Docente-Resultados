@@ -1,0 +1,36 @@
+{% extends 'usuario_administrador_base.html' %}
+
+{% block title %}Ayuda - Administrador{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Ayuda para Administradores</h1>
+    <hr>
+    <p>Bienvenido al sistema de atención de reclamos. Como administrador, tienes acceso a varias funciones para gestionar los reclamos de tu departamento. Aquí te proporcionamos algunas instrucciones básicas sobre cómo manejarte en el dashboard:</p>
+    
+    <h3>1. Dashboard</h3>
+    <p>En el dashboard, puedes ver un resumen de todos los reclamos asignados a tu departamento. Utiliza las diferentes secciones para navegar y gestionar los reclamos eficientemente.</p>
+    
+    <h3>2. Manejo de Reclamos</h3>
+    <p>Para manejar los reclamos, sigue estos pasos:</p>
+    <ul>
+        <li><strong>Visualizar Reclamos:</strong> En la sección de reclamos, puedes ver todos los reclamos pendientes. Cada reclamo tiene información detallada incluyendo el ID, el asunto, el contenido, la fecha y el estado.</li>
+        <li><strong>Actualizar Estado:</strong> Puedes actualizar el estado de un reclamo (Pendiente, En Proceso, Resuelto). Haz clic en el reclamo y selecciona el nuevo estado.</li>
+        <li><strong>Agregar Comentarios:</strong> Si necesitas agregar comentarios o notas a un reclamo, puedes hacerlo en la misma vista detallada del reclamo.</li>
+    </ul>
+    
+    <h3>3. Visualización de Gráficos</h3>
+    <p>En la sección de gráficos analíticos, puedes visualizar estadísticas y gráficos relacionados con los reclamos de tu departamento. Estos gráficos te ayudarán a entender mejor el rendimiento y las áreas de mejora.</p>
+    
+    <h3>4. Generación de Reportes</h3>
+    <p>Si necesitas generar un reporte, puedes hacerlo en la sección de informes. Selecciona los parámetros necesarios y descarga el informe en el formato deseado (HTML o PDF).</p>
+    
+    <h3>5. Ayuda Adicional</h3>
+    <p>Si necesitas más ayuda, no dudes en contactarnos a través de la sección de soporte o enviándonos un correo electrónico a soporte@universidad.edu.</p>
+    
+    <hr>
+    <p>Esperamos que estas instrucciones te sean de ayuda. ¡Gracias por utilizar el sistema de atención de reclamos!</p>
+    
+    <a class="btn btn-primary" href="{{ url_for('bienvenido_admin') }}">Volver al Dashboard</a>
+</div>
+{% endblock %}

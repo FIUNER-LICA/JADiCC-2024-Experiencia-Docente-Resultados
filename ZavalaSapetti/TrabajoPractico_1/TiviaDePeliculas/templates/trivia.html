@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario con botones</title>
+    <script>
+
+        let aciertos = 0
+        let ronda = 0
+        let cantidades
+        let tiempoEspera = false
+
+        function botonPresionado(boton) {            
+            if(tiempoEspera)
+                return;
+            tiempoEspera = true;
+
+            let res = document.getElementById(ronda+"_4").name;
+            let r = document.getElementById("respuesta_usuario");
+            if (boton.value == res) {
+                // Cambiar el color del botón a verde
+                aciertos++
+                boton.style.backgroundColor = "gold";
+                r.textContent = "Felicitaciones, es correcto"
+                r.style.color = "gold";
+                // Esperar 2 segundos antes de continuar
+                setTimeout(function() {                                        
+                    // Revertir el color del botón después de 2 segundos
+                    boton.style.backgroundColor = "";
+                    r.style.color = "";
+                    r.textContent = ""
+                    continuarJuego();
+                }, 1000);
+            } 
+            else {
+                                
+                let boton1 = document.getElementById("btn1")
+                
+                if ( boton1.value == res)
+                    boton1.style.backgroundColor = "green";
+                
+                let boton2 = document.getElementById("btn2")
+                
+                if ( boton2.value == res)
+                    boton2.style.backgroundColor = "green";
+                
+                let boton3 = document.getElementById("btn3")
+                
+                if ( boton3.value == res)
+                    boton3.style.backgroundColor = "green";    
+               
+                r.textContent = "Ups, fallaste"
+                r.style.color = "red";
+                
+                setTimeout(function() {                                                            
+                    // Revertir el color del botón después de 2 segundos
+                    boton1.style.backgroundColor = "";
+                    boton2.style.backgroundColor = "";
+                    boton3.style.backgroundColor = "";
+                    r.style.backgroundColor = "";
+                    r.textContent = ""
+                    continuarJuego();                            
+                }, 1000);                                
+            }
+            
+        }
+
+        function continuarJuego() {      
+            tiempoEspera = false
+            ronda++;
+            if (ronda >= document.getElementById("cantidad_rondas").name) {
+                document.getElementById("respuesta").value = aciertos+"/"+document.getElementById("cantidad_rondas").name;
+                document.getElementById("miFormulario").submit();
+            } 
+            else {
+                document.getElementById("frase").textContent = document.getElementById(ronda+"_0").name;
+                document.getElementById("btn1").value = document.getElementById(ronda+"_1").name;            
+                document.getElementById("btn2").value = document.getElementById(ronda+"_2").name;
+                document.getElementById("btn3").value = document.getElementById(ronda+"_3").name;
+            }
+            
+        }
+
+    </script>    
+</head>
+
+<body>        
+    {% set ilength = trivia|length %}
+    <input type = "hidden" id="cantidad_rondas" name ="{{ ilength }}">
+    {% for i in range(ilength) %}
+        {% set length = trivia[i]|length %}
+        {% for j in range(length) %}
+            <input type = "hidden" id="{{ i }}_{{ j }}" name ="{{ trivia[i][j] }}">
+        {% endfor %}
+    {% endfor %}
+    <div class = "cabezera_div">
+        <img class = "cabezera" src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">    
+    </div>  
+    
+    <div class="fondo-ruido">
+        <div id = "frase" class="contenido" value = "{{trivia[0][0]}}">
+            {{trivia[0][0]}}
+        </div>
+    </div>
+    <form action = "/trivia.html" method = "post" class="opciones" id="miFormulario">
+        <input type="hidden" id="respuesta" name="respuesta" value="">
+        <input type="hidden" id="usuario" name="usuario" value="{{usuario}}">
+        <input type="hidden" id="date" name="date" value="{{date}}">
+        <input name = "{{trivia[0][1]}}" id = "btn1" type="button" value="{{trivia[0][1]}}" onclick="botonPresionado(this)"><br>        
+        <input name = "{{trivia[0][2]}}" id = "btn2" type="button" value="{{trivia[0][2]}}" onclick="botonPresionado(this)"><br>
+        <input name = "{{trivia[0][3]}}" id = "btn3" type="button" value="{{trivia[0][3]}}" onclick="botonPresionado(this)">
+    </form>
+    <div id = "respuesta_usuario"class="respuesta"></div>
+</body>
+
+<style>
+html{        
+    background-color: black;
+    text-align: center;
+}
+
+.opciones{        
+    display: inline-block;
+    width: 420px; /* Ajustar según el espacio deseado */
+    height: 180px;
+    vertical-align: top; /* Alinear arriba */
+    box-sizing: border-box; /* Incluir padding y border en el ancho */
+    
+}
+
+input[type="button"]{
+    margin-top: 10px;
+    position: relative;    
+    width: 350px;
+    height: 60px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: aqua;    
+    transition: background-color 0.5s, color 0.5s;    
+    background-color: black;
+    color: aqua;
+
+}
+
+.fondo-ruido {
+    position: relative;
+    margin-top: 10px;
+    width: 420px;
+    height: 200px;
+    background-image: url('/static/fondo_frase.png');
+    background-size: cover;    
+    display: inline-block;
+    border: solid aqua 1px;
+    text-align: center;
+}
+.contenido {
+    position: relative;        
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+}
+
+input[type="button"]:hover{    
+    background-color: aqua;
+    color:black;
+    transition: background-color 0.5s, color 0.5s;    
+}
+
+.frase-label{
+    color:white;
+}
+
+.respuesta{
+    color: white;
+    font-size: 50px;
+    transition: color 0.5s;
+}
+</style>
+</html>

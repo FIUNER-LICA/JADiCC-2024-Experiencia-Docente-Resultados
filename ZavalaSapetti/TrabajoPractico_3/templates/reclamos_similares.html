@@ -1,0 +1,76 @@
+{% extends 'base_usuario_final.html' %}
+
+{% block title %}
+Reclamos Similares
+{% endblock %}
+
+{% block styles %}
+<link rel='stylesheet' href='/static/css/reclamo.css' type='text/css' />
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="display-6 font-weight-bold">Reclamos Similares</h1>
+    <hr class="my-4">
+
+    {% for reclamo in reclamos_similares %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Asunto: {{ reclamo.asunto }}</h5>
+            <img src="/static/default.jpg" class="card-img-top mb-3" alt="Imagen del reclamo">
+            <p class="card-text">{{ reclamo.contenido }}</p>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha/Hora</th>
+                        <th>Departamento</th>
+                        <th>N° Adherentes</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ reclamo.id }}</td>
+                        <td>{{ reclamo.fecha }}</td>
+                        <td>{{ reclamo.departamento_correspondiente }}</td>
+                        <td>{{ reclamo.numero_adheridos }}</td>
+                        <td>
+                            {% if reclamo.estado == "Pendiente" %}
+                            <span class="badge badge-warning">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "En Proceso" %}
+                            <span class="badge badge-info">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "Inválido" %}
+                            <span class="badge badge-warning">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "Resuelto" %}
+                            <span class="badge badge-success">{{ reclamo.estado }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form action="{{ url_for('reclamos_similares', username=username) }}" method="POST">
+                                <input type="hidden" name="adherirse" value="{{ reclamo.id }}">
+                                <button type="submit" class="btn btn-info">Adherirse</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+
+    <hr class="my-4">
+    <h2 class="display-6 font-weight-bold text-center">¡Mi Reclamo Es Diferente!</h2>
+    <form action="{{ url_for('reclamos_similares', username=username) }}" method="POST">
+        <input type="hidden" name="ContinuarCreando" value="{{ nuevo_reclamo }}">
+        <button type="submit" class="btn btn-warning btn-lg btn-block mt-3">Continuar con la creación de mi reclamo</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

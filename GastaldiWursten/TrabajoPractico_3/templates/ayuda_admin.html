@@ -1,0 +1,182 @@
+{% extends 'usuario_administrador_base.html' %} <!--3)-->
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block content %}
+
+<hr class="my-4 ">
+
+<h1 class="display-6 font-weight-bold"><center>Ayuda</center></h1>
+
+<hr class="my-4">
+
+  <h5 class="mx-5 mr-5" ><u>Manejar</u> <u>Reclamos</u></h5>
+
+  <img class="mx-5 mr-5" src="/static/imagenes_generales/Ayuda/images/image5.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+
+                    
+  <div style="text-align: justify; text-justify: inter-word;">
+    <p class="mx-5 mr-5" style="font-size: 16px;">
+      En esta sección aparecerán los reclamos que han sido clasificados como pertinentes a su departamento, figurando en ellos los siguientes datos:
+      </p>
+      
+<p class="mx-5 mr-5" style="font-weight: bold;""><span style="font-weight: bold; color: red; ">(1)</span> Asunto</p>
+<p class="mx-5 mr-5" style="font-weight: bold;""><span style="font-weight: bold; color: red;">(2) </span>Imagen representativa (si el usuario ha subido una)</p>
+<p class="mx-5 mr-5" style="font-weight: bold;""><span style="font-weight: bold; color: red;">(3) </span>Contenido</p>
+<p class="mx-5 mr-5" style="font-weight: bold;""><span style="font-weight: bold; color: red;">(4) </span>Datos: id (número que identifica al reclamo), fecha y hora de creación, departamento al que fue asignado, el número de usuarios que se han adherido al reclamo (incluye al autor) , estado actual del reclamo.</p>
+   
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image14.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+
+<br>
+<div style="text-align: justify; text-justify: inter-word;">
+  <p class="mx-5 mr-5" style="font-size: 16px;">
+    Debajo de los datos del reclamo usted puede administrarlo modificando el estado del mismo, seleccionando el nuevo estado que desea asignar y luego presionando sobre el botón “CAMBIAR ESTADO”.
+  </p>
+</div>  
+
+  <div class="d-flex justify-content-center">
+    <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image7.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+
+<br>
+
+<div style="text-align: justify; text-justify: inter-word;">
+  <p class="mx-5 mr-5" style="font-size: 16px;">
+    En caso de que la operación se realice correctamente le aparecerá un mensaje que confirma tal cambio:
+  </p>
+</div>
+
+<div class="d-flex justify-content-center">
+  <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image8.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+
+<br>
+{%if nombre_departamento == "secretaría técnica" : %}
+<div style="text-align: justify; text-justify: inter-word;">
+  <p class="mx-5 mr-5" style="font-size: 16px;">Como responsable de la secretaría técnica, usted tendrá la capacidad de derivar los reclamos hacia otros departamentos de la institución, para ello deberá seleccionar el departamento disponible en la lista y presionar sobre el botón “DERIVAR RECLAMO”</p>
+</div>
+
+<div class="d-flex justify-content-center">
+  <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image11.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+
+<br>
+
+{%endif%}
+
+<h5 class="mx-5 mr-5" ><u>Analítica</u></h5>
+
+<img class="mx-5 mr-5" src="/static/imagenes_generales/Ayuda/images/image2.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+
+
+<br>
+<br>
+<div style="text-align: justify; text-justify: inter-word;">
+  <p class="mx-5 mr-5" style="font-size: 16px;">
+    En esta sección usted verá las estadísticas relacionadas con la administración de los reclamos de su departamento como:
+</p>
+  </div>
+
+  <p class="mx-5 mr-5" style="font-weight: bold;"">
+    • Porcentaje de reclamos del departamento según su estado.
+  </p>
+
+  <div class="d-flex justify-content-center">
+  <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image12.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+  </div>
+  <br>
+
+  <p class="mx-5 mr-5" style="font-weight: bold;"">
+    • Una nube de palabras con las palabras más frecuentes en los contenidos de todos los reclamos recibidos.
+  </p>
+
+  <div class="d-flex justify-content-center">
+  <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image3.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+<br>
+
+<p class="mx-5 mr-5" style="font-weight: bold;"">
+  • Gráfica circular indicando el porcentaje de reclamos “En Proceso” y “Resuelto” , diagrama de barras cantidad de reclamos para cada estado.
+</p>
+
+<div class="d-flex justify-content-center">
+<img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image10.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+</div>
+
+<br>
+
+<div style="text-align: justify; text-justify: inter-word;">
+  <p class="mx-5 mr-5" style="font-size: 16px;">
+    Además también podrá descargar un informe en los formatos disponibles con el estado de los reclamos y gráficas estadísticas, haciendo click sobre los botones de descarga en los formatos que se encuentren disponibles. 
+  </p>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image1.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+    </div>
+
+<br>
+
+<h5 class="mx-5 mr-5" ><u>Mi</u> <u>Perfil</u></h5>
+
+  <img class="mx-5 mr-5" src="/static/imagenes_generales/Ayuda/images/image9.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+
+  <br>
+    
+  <div style="text-align: justify; text-justify: inter-word;">
+    <p class="mx-5 mr-5" style="font-size: 16px;">
+      En esta sección usted podrá ver los datos relacionados a su cuenta de usuario y tendrá la opción de modificar sus datos personales y relacionados a su cuenta, modificando los campos correspondientes y presionando sobre el botón “Actualizar Datos”
+
+    </p>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image6.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+      </div>
+  
+      <br>
+
+      <div style="text-align: justify; text-justify: inter-word;">
+        <p class="mx-5 mr-5" style="font-size: 16px;">
+          También podrá cambiar su contraseña presionando sobre el botón “Cambiar Contraseña” que lo llevará al siguiente formulario.
+        </p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image4.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+          </div>
+
+          <br>
+
+          <div style="text-align: justify; text-justify: inter-word;">
+            <p class="mx-5 mr-5" style="font-size: 16px;">
+              En caso de que la operación se realice correctamente le aparecerá un mensaje que confirma tal cambio:
+            </p>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <img class="mx-auto" src="/static/imagenes_generales/Ayuda/images/image15.png" alt="imagen1" style="border-radius: 5px; border: 2px solid rgb(187, 187, 187);">
+            </div>
+
+            </br>
+            <br>
+            <br>
+
+
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{%- endblock scripts %}

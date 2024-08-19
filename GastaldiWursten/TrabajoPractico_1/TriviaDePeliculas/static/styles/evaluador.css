@@ -1,0 +1,47 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.respuesta-container {
+    display: flex;
+    align-items: center;
+}
+
+.respuesta-box {
+    border: 2px solid rgb(94, 208, 243);
+    background-color: gray;
+    padding: 10px;
+    flex: 1;
+    margin-right: 20px;
+    word-wrap: break-word;
+    border-radius: 10px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px; 
+}
+
+.siguiente-btn {
+    background-color: black;
+    color: rgb(94, 208, 243);
+    border: 2px solid rgb(94, 208, 243);
+    padding: 15px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 10px;
+    align-self: flex-start;
+}
+
+.siguiente-btn:hover {
+    background-color: cyan;
+    color: black;
+}
+
+.imagen {
+    align-self: flex-start;
+}

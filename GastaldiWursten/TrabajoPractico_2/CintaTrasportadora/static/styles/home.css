@@ -1,0 +1,101 @@
+              /* Estilos para el recuadro grande con borde negro */
+              .container {
+                border: 5px solid black;
+                padding: 10px;
+                display: flex;
+                background-color: rgb(252, 249, 249); 
+                width: 70%; 
+                border-radius: 10px;
+            }
+    
+            /* Estilos para la parte izquierda */
+            .left-side {
+                flex: 1;
+                padding: 10px;
+                width: 25%; 
+            }
+    
+            /* Estilos para la parte derecha */ 
+            .right-side {
+                background-color: rgb(255, 255, 255);
+                border: 1px solid rgb(0, 0, 0);
+                flex: 3; 
+                padding: 10px;
+                width: 75%; 
+                border-radius: 10px;
+            }
+    
+            /* Estilos para el botón Submit */
+            .btn-submit {
+                background-color: rgb(12, 218, 245);
+            color: rgb(255, 255, 255);
+            border: 2px solid rgb(0, 0, 0);
+            padding: 15px 20px; 
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            width: 200px;
+            border-radius: 10px;
+            }
+    
+            /* Estilos para el recuadro azul */
+            .blue-box {
+                background-color: blue;
+                color: white;
+                padding: 5px;
+                text-align: center;
+                border-radius: 10px;
+            }
+    
+    
+            /* Estilos para el recuadro amarillo */
+            .yellow-box {
+                background-color: rgb(250, 250, 74);
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                border: 1px solid rgb(0, 0, 0);
+            }
+    
+            /* Estilos para el texto marrón en el recuadro amarillo */
+            .brown-text {
+                color: brown;
+            }
+    
+            /* Estilos para los párrafos "aw Frutas" con bordes */
+            .fruit-paragraph {
+                border: 1px solid rgb(0, 0, 0);
+                background-color: rgb(248, 248, 248);
+                padding: 5px;
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between; 
+                align-items: center;
+                border-radius: 10px;
+                font-size: 16px;
+                
+            }
+    
+            /* Estilos para el recuadro azul al lado de "aw Frutas" */
+            .number-box {
+                border: 1px solid rgb(0, 0, 0);
+                background-color: blue; 
+                color: white; 
+                padding: 5px;
+                border-radius: 5px;
+            }
+    
+            .number-box-yellow {
+                border: 1px solid rgb(0, 0, 0);
+                background-color: rgb(250, 193, 6); 
+                color: white; 
+                padding: 5px;
+                border-radius: 5px;
+            }
+    
+            input[type="number"] {
+                margin-left: 10px;
+                width: 50px; 
+            }

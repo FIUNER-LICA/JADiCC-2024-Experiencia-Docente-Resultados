@@ -1,0 +1,4 @@
+Augusto,Wursten,jefe_departamento,administrador,wurstenA,wursten.augusto@gmail.com,admin123,maestranza
+Marcelo,Gastaldi,jefe_departamento,administrador,marceloG,gastaldi.marcelo@gmail.com,admin123,soporte informático
+Bruce,Wayne,jefe_departamento,administrador,BWayne,nosoybatman@soybatman.com,admin123,secretaría técnica
+

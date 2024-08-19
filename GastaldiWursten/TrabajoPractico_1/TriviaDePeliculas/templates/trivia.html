@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<!--Pantalla que se muestra cuando se esta jugando. Muestra la frase tomada de frases_de_pelicula.txt y muestra 3 opciones-->
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jugando Trivia Peliculas</title>
+        <link rel="stylesheet" href="/static/styles/trivia.css"> 
+    </head>
+
+    <body>
+        <img src="/static/images/trivia2final.gif" alt="">
+        <h2>Frase:{{session.get('nro_partida_actual')}}/{{session.get('nro_partidas')}}</h2>
+        
+        <div class="container">
+            <div class="info-box">
+                <!--Muestra una frase de frases_de_pelicula.txt-->
+                <h1>"{{frase_en_juego}}"</h1>
+            </div>
+            <form action="{{url_for('evaluador')}}" method="post">
+            <div class="button-container">
+                <!--Da una lista de opciones aleatorias incluyendo la correcta-->
+                {% for opcion in lista_opciones %}
+                <button type="submit" name="respuesta" value="{{opcion}}">{{opcion}}</button>
+                {% endfor %}
+            </form>
+            </div>
+        </div>
+    </body>
+</html>

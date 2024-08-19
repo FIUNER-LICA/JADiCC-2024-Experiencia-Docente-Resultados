@@ -1,0 +1,16 @@
+{% extends 'base_usuario_final.html' %}
+
+{% block title %}Bienvenido{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Bienvenido, {{ user }}</h1>
+    <p>Elige una opción para continuar:</p>
+    <ul>
+        <li><a href="{{ url_for('crearreclamo', username=user) }}">Crear Reclamo</a></li>
+        <li><a href="{{ url_for('listar_reclamos', username=user) }}">Listar Reclamos</a></li>
+        <li><a href="{{ url_for('mis_reclamos', username=user) }}">Mis Reclamos</a></li>
+    </ul>
+    <a href="{{ url_for('logout') }}" class="btn btn-primary mt-3">Log Out</a>
+</div>
+{% endblock %}

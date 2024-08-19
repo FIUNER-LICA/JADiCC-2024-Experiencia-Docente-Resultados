@@ -1,0 +1,131 @@
+{% extends 'base_usuario_final.html' %}
+
+{% block title %}Listar Reclamos{% endblock %}
+
+{% block styles %}
+<link rel='stylesheet' id='roboto-subset.css-css' href='/static/css/reclamo.css' type='text/css' media='all' />
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success mt-1" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <hr class="my-4">
+    <h1 class="display-6 font-weight-bold text-center">{{ filtro }}</h1>
+    <hr class="my-4">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="filtroDepartamento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrar por Departamento
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="filtroDepartamento">
+                        <a class="dropdown-item" href="{{ url_for('listar_reclamos', username=username) }}">Todos</a>
+                        <form id="formFiltroDepartamento" method="post" action="{{ url_for('listar_reclamos', username=username) }}">
+                            <input id="filtrar_departamento" type="hidden" name="filtrar_departamento" value="" />
+                            {% for departamento in nombres_departamentos %}
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_departamento').value = '{{ departamento }}'; document.getElementById('formFiltroDepartamento').submit();">{{ departamento }}</a>
+                            {% endfor %}
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="filtroEstado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrar por Estado
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="filtroEstado">
+                        <a class="dropdown-item" href="{{ url_for('listar_reclamos', username=username) }}">Todos</a>
+                        <form id="formFiltroEstado" method="post" action="{{ url_for('listar_reclamos', username=username) }}">
+                            <input id="filtrar_estado" type="hidden" name="filtrar_estado" value="" />
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'En Proceso'; document.getElementById('formFiltroEstado').submit();">En Proceso</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Pendiente'; document.getElementById('formFiltroEstado').submit();">Pendiente</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Resuelto'; document.getElementById('formFiltroEstado').submit();">Resuelto</a>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('filtrar_estado').value = 'Inválido'; document.getElementById('formFiltroEstado').submit();">Inválido</a>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {% for reclamo in reclamos %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Asunto: {{ reclamo.asunto }}</h5>
+            <div class="cardimg mb-3" style="height: 200px; overflow: hidden;">
+                <a href="/static/Reclamos/{{ reclamo.imagen}}">
+                    <img src="/static/Reclamos/{{ reclamo.imagen }}" class="img-fluid" style="height: 100%; object-fit: contain;" alt="Imagen del reclamo">
+                </a>
+            </div>
+            <p class="card-text">{{ reclamo.contenido }}</p>
+            <table class="table table-bordered text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha/Hora</th>
+                        <th>Departamento</th>
+                        <th>N° Adherentes</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ reclamo.id }}</td>
+                        <td>{{ reclamo.fecha }}</td>
+                        <td>{{ reclamo.departamento_correspondiente }}</td>
+                        <td>{{ reclamo.usuarios_adheridos | length }}</td> 
+                        <td>
+                            {% if reclamo.estado == "Pendiente" %}
+                            <span class="badge badge-warning">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "En Proceso" %}
+                            <span class="badge badge-info">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "Inválido" %}
+                            <span class="badge badge-danger">{{ reclamo.estado }}</span>
+                            {% elif reclamo.estado == "Resuelto" %}
+                            <span class="badge badge-success">{{ reclamo.estado }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if reclamo.id not in ids_reclamos_adheridos %}
+                            <form action="{{ url_for('listar_reclamos', username=username) }}" method="POST">
+                                <input type="hidden" name="adherirse" value="{{ reclamo.id }}">
+                                <button type="submit" class="btn btn-info">Adherirse</button>
+                            </form>
+                            {% else %}
+                            <form action="{{ url_for('listar_reclamos', username=username) }}" method="POST">
+                                <input type="hidden" name="desadherirse" value="{{ reclamo.id }}">
+                                <button type="submit" class="btn btn-warning">Desadherirse</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- Botón para volver al menú de bienvenida -->
+    <div class="mt-4">
+        <a href="{{ url_for('bienvenido_usuariofinal', username=username) }}" class="btn btn-primary">Volver al Menú</a>
+    </div>
+
+    <hr class="my-4">
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

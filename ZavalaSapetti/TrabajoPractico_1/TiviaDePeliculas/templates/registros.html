@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>    
+    <div class = "cabezera_div">
+        <img class = "cabezera" src="{{ url_for('static', filename='cabezera.png') }}" alt="Imagen Cabezera">            
+    </div>   
+    <h1>Registro de Partidas</h1>
+    <table>
+        <tr>
+            <th>Usuario</th>
+            <th>Puntaje</th>
+            <th>Hora de inicio</th>
+        </tr>
+        {%for partida in registro %}
+            <tr>
+                <td>{{ partida[0] }}</td>
+                <td>{{ partida[1] }}</td>
+                <td>{{ partida[2] }}</td>
+            </tr>
+        {% endfor %}
+    </table>   
+    
+        
+    <form action="/" method="get">
+        <button class="home" type="submit">Volver a la página inicial</button>
+    </form>    
+    <form action="/graficas.html" method="get">
+        <button class="grafico" type="submit">Mostrar Gráficas</button>
+    </form>
+</body>
+
+
+<style>
+    html{        
+        background-color: black;
+        text-align: center;
+        color: white;
+    }
+
+    button{
+        margin-top: 10px;
+        position: relative;    
+        width: 350px;
+        height: 60px;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: aqua;    
+        transition: background-color 0.5s, color 0.5s;    
+        background-color: black;
+        color: aqua;
+
+    }
+        
+    button:hover{    
+        background-color: aqua;
+        color:black;
+        transition: background-color 0.5s, color 0.5s;    
+    }
+
+    .peliculas_div{        
+        width: 840px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .divisor{
+        width: 860px;                
+        border: dotted aqua 1px;
+    }
+
+    .home{
+        background-color: rgb(0,0,0,.5);
+        position: fixed;        
+        left: 50%;
+        transform: translateX(-100%);
+        bottom: 10px;
+        width: 430px;
+        height: 30px;
+    }
+
+    .grafico{
+        background-color: rgb(0,0,0,.5);
+        position: fixed;        
+        left: 50%;        
+        bottom: 10px;
+        width: 430px;
+        height: 30px;
+    }
+
+    .cabezera{
+        position: relative;    
+    }
+
+    table {
+        width: 860px;
+        border-collapse: collapse;
+        border-radius: 5px; /* Establecer el radio de las esquinas */
+        overflow: hidden; /* Ocultar cualquier contenido que se desborde */
+        margin: 0 auto;
+    }
+    th, td {
+        border: 1px solid aqua;
+        padding: 5px;
+    }
+
+    tr{
+        background-color: transparent;
+        color: white;
+        transition: background-color 0.5s,color 0.5s;
+    }
+
+    tr:hover{
+        background-color: aqua;
+        color: black;
+        transition: background-color 0.5s,color 0.5s;
+    }
+</style>
+</html>

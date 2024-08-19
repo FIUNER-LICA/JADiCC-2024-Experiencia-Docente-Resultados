@@ -1,0 +1,88 @@
+/* Estilo de la barra de navegación */
+.navbar2 {
+    background-color: #66b2fd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    background-image: linear-gradient(200deg , #525bd1, #248aff);
+    box-shadow: 0 6px 8px rgba(0, 138, 148, 0.1);
+    
+}
+
+/* Estilo de los enlaces en la barra de navegación */
+.navbar-dark2 .navbar-nav2 .nav-link2 {
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+}
+.navbar-brand2 {
+margin-left: 10px; /* Ajusta el valor del margen izquierdo según tus necesidades */
+font-weight: bold;
+}
+/* Estilo de los enlaces al pasar el cursor sobre ellos */
+.navbar-dark2 .navbar-nav2 .nav-link:hover {
+    color: #f8f9fa; /* Cambia el color al pasar el cursor */
+}
+
+/* Estilo del botón del menú desplegable */
+.navbar-dark2 .navbar-toggler-icon2 {
+    background-color: #ffffff; /* Color del botón */
+    margin-right: 10px; /* Agrega margen derecho */
+}
+
+/* Estilo de la imagen de perfil */
+.rounded-circle {
+    border: 2px solid #ffffff; /* Borde blanco */
+}
+
+/* Estilo del menú desplegable */
+.dropdown-menu2 {
+background-image: linear-gradient(200deg , #8b8fe0, #5694db);
+left: auto; /* Reinicia la posición izquierda */
+right: 0; /* Abre el menú hacia la derecha */
+margin-left: 10px; /* Agrega margen izquierdo */
+margin-right: 10px; /* Agrega margen derecho */
+}
+
+/* Estilo de los enlaces dentro del menú desplegable */
+.dropdown-item2 {
+    color: #ffffff; /* Color del texto */
+}
+
+/* Estilo de los enlaces al pasar el cursor dentro del menú desplegable */
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Cambia el color al pasar el cursor */
+    color: #343a40; /* Cambia el color del texto al pasar el cursor */
+}
+
+/* Estilo de las columnas de decoración */
+.decoration-column {
+   
+    min-height: 87vh; /* Altura mínima igual al alto de la ventana */
+    background: rgb(140,184,185);
+    background: linear-gradient(0deg, rgba(140,184,185,1) 0%, rgba(179,178,178,1) 100%);
+}
+
+/* Estilo de la columna central con contenido */
+.content-column {
+    background-color: #fdfdfd; /* Fondo blanco */
+    min-height: 87vh; /* Altura mínima igual al alto de la ventana */
+    position: relative;
+}
+
+/* Estilo del footer */
+.footer {
+    background-image: linear-gradient(200deg , #1f27a0, #0278ff);
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Alineación del texto al centro */
+    padding: 20px; /* Espaciado interno */
+    position: relative;
+    width: 100%;
+}
+
+.slick-slide { 
+    outline: none; 
+   }
+   #prev, #next {  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+   }

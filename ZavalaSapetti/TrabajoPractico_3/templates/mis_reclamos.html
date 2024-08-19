@@ -1,0 +1,61 @@
+{% extends 'base_usuario_final.html' %}
+
+{% block title %}Mis Reclamos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mt-5">Mis Reclamos</h1>
+    {% if reclamos or reclamos_adheridos %}
+    <div class="list-group">
+        {% for reclamo in reclamos %}
+        <div class="list-group-item flex-column align-items-start mb-3">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ reclamo.asunto }}</h5>
+                <small>{{ reclamo.fecha }}</small>
+            </div>
+            <p class="mb-1">{{ reclamo.contenido }}</p>
+            <small><strong>Estado:</strong> 
+                {% if reclamo.estado == "Pendiente" %}
+                <span class="badge badge-warning">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "En Proceso" %}
+                <span class="badge badge-info">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "Inválido" %}
+                <span class="badge badge-danger">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "Resuelto" %}
+                <span class="badge badge-success">{{ reclamo.estado }}</span>
+                {% endif %}
+            </small>
+        </div>
+        {% endfor %}
+        {% for reclamo in reclamos_adheridos %}
+        <div class="list-group-item flex-column align-items-start mb-3">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ reclamo.asunto }}</h5>
+                <small>{{ reclamo.fecha }}</small>
+            </div>
+            <p class="mb-1">{{ reclamo.contenido }}</p>
+            <small><strong>Estado:</strong> 
+                {% if reclamo.estado == "Pendiente" %}
+                <span class="badge badge-warning">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "En Proceso" %}
+                <span class="badge badge-info">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "Inválido" %}
+                <span class="badge badge-danger">{{ reclamo.estado }}</span>
+                {% elif reclamo.estado == "Resuelto" %}
+                <span class="badge badge-success">{{ reclamo.estado }}</span>
+                {% endif %}
+            </small>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No tienes reclamos.
+    </div>
+    {% endif %}
+    <!-- Botón para volver al menú de bienvenida -->
+    <div class="mt-4">
+        <a href="{{ url_for('bienvenido_usuariofinal', username=username) }}" class="btn btn-primary">Volver al Menú</a>
+    </div>
+</div>
+{% endblock %}

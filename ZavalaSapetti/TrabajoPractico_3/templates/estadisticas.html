@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadísticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn-pdf {
+            background-color: #f44336;
+        }
+        .btn-html {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Porcentaje de Reclamos por Estado</h1>
+    <img src="{{ url_for('static', filename='estadistica/graficopastel.png') }}" alt="Grafico Pastel">
+    <h1>Mediana de Reclamos En Proceso y reclamos Pendientes</h1>
+    <p>Mediana de Resueltos: {{ Mediana_r }}</p>
+    <p>Mediana de En Proceso: {{ Mediana_ep }}</p>
+    <h1>Nube de Palabras de los Reclamos</h1>
+    <img src="{{ url_for('static', filename='estadistica/nube_palabras.png') }}" alt="Nube de Palabras">
+    <form method="post" action="{{ url_for('generar_informe') }}">
+        <input type="hidden" name="formato" value="PDF">
+        <button type="submit" class="btn btn-pdf">Descargar Informe en PDF</button>
+    </form>
+    <form method="post" action="{{ url_for('generar_informe') }}">
+        <input type="hidden" name="formato" value="HTML">
+        <button type="submit" class="btn btn-html">Descargar Informe en HTML</button>
+    </form>
+</body>
+</html>
